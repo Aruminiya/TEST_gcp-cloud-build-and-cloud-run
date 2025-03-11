@@ -1,4 +1,9 @@
 steps:
+# 步驟 1：構建 Docker 鏡像
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'gcr.io/asia-east1-docker.pkg.dev/test-c77eb/test', '.' ]
+  args: ['build', '-t', 'gcr.io/asia-east1-docker.pkg.dev/test-c77eb/test', '.']
+# 步驟 2：推送鏡像到 Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/asia-east1-docker.pkg.dev/test-c77eb/test']
+# 'logsBucket' 欄位指定了 Cloud Build 將構建日誌儲存到的 Google Cloud Storage 儲存桶。
 logsBucket: 'gs://test-c77eb.appspot.com'
